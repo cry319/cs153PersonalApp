@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Image, TextInput, Button, StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import About from './components/About'
 import ComicScreen from './components/ComicScreen'
 
 const Stack = createStackNavigator();
