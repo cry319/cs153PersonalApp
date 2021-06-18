@@ -1,0 +1,53 @@
+import React from 'react';
+import { StyleSheet, Image, Text, View } from 'react-native';
+import { Button, Icon } from 'react-native-elements'
+
+export default function About({route,navigation}) {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.headerText}> About this App </Text>
+      <View style={styles.leftAllignment}>
+        <Text style={styles.generalText}>Use this app to browse interesting comics!</Text>
+        <Text style={styles.generalText}>Created by Ruyi Cai</Text>
+      </View>
+      <View>
+        <Button
+          style={{flexDirection:'row'}}
+          title="Email"
+        />
+        <Button title="Go Home"
+            onPress={() => navigation.navigate('Home')} />
+      </View>
+    </View>
+  )
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection:'column',
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin:'25%',
+    marginTop:20,
+    padding:20,
+  },
+  rowContainer: {
+    flexDirection:'row',
+  },
+  columnContainer: {
+    flexDirection: 'column',
+  },
+  headerText: {
+    fontSize: 40,
+    color: 'blue'
+  },
+  leftAllignment: {
+    alignItems: 'left',
+  },
+  generalText:{
+    fontSize: 20,
+    color: 'black',
+  }
+});
