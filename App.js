@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
-import { Image, TextInput, Button, StyleSheet, Text, View } from 'react-native';
+import { Image, TextInput, Button, StyleSheet, Text, View, ImageBackground } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import About from './components/About'
-import ComicScreen from './components/ComicScreen'
+import ReadingCalculator from './components/ReadingCalculator'
+import ReadingList from './components/ReadingList'
+import Record from './components/Record'
 
 const Stack = createStackNavigator();
 
@@ -30,10 +32,10 @@ export default function App () {
             component={HomeScreen}
             options={{ title: 'Welcome!' }}
           />
-          <Stack.Screen name="Introduction" component={IntroScreen} />
-          <Stack.Screen name="MainTool" component={ToolScreen} />
           <Stack.Screen name="About" component={About} />
-          <Stack.Screen name="ComicScreen" component={ComicScreen} />
+          <Stack.Screen name="ReadingCalculator" component={ReadingCalculator} />
+          <Stack.Screen name="ReadingList" component={ReadingList} />
+          <Stack.Screen name="Record" component={Record} />
         </Stack.Navigator>
     </NavigationContainer>
   );
@@ -41,31 +43,43 @@ export default function App () {
 
 const HomeScreen = ({ navigation }) => {
   return (
+    <ImageBackground
+      source={{uri:'https://image.freepik.com/free-vector/winter-background-with-pastel-color-brushes-leaves_220290-42.jpg',}}
+      style={styles.image}>
     <View style={styles.container}>
-    <Header text='Make Records of Your Favourite Comics Here!'/>
-      <Button
-        title="What does this app do?"
-        onPress={() =>
-          navigation.navigate('Introduction', { name: 'User' })
-        }
-      />
+    <Header text='Explore Reading Function Here'/>
+
+      <View style={styles.space} />
 
       <Button
-        title="MainTool"
-        color="red"
-        onPress={() =>
-          navigation.navigate('MainTool')
-        }
-      />
-
-
-      <Button
-        title="Comic Calculator"
+        title="Reading Calculator"
         color="orange"
         onPress={() =>
-          navigation.navigate('ComicScreen')
+          navigation.navigate('ReadingCalculator')
         }
       />
+
+      <View style={styles.space} />
+
+      <Button
+        title="Reading History Memo"
+        color="purple"
+        onPress={() =>
+          navigation.navigate('ReadingList')
+        }
+      />
+
+      <View style={styles.space} />
+
+      <Button
+        title="Favorite Record"
+        color="navy"
+        onPress={() =>
+          navigation.navigate('Record')
+        }
+      />
+
+      <View style={styles.space} />
 
       <View style={{flexDirection:'row'}}>
         <Button
@@ -75,81 +89,23 @@ const HomeScreen = ({ navigation }) => {
             navigation.navigate('About')
           }
         />
-        <Button
-          title="Contact Us"
-          color='pink'
-          onPress={() =>
-            navigation.navigate('About')
-          }
-        />
       </View>
     </View>
+    </ImageBackground>
   );
 };
 
-const IntroScreen = ({ navigation, route }) => {
-  return <Text>This is {route.params.name}'s Comics Helper Tool!</Text>;
-};
-
-
-const ToolScreen = ({navigation,route}) => {
-  return (
-    <View style={styles.container}>
-      <Header text='Explore the main tool' />
-
-      <View style={styles.generalText}>
-        <Text> Instruction: Type the name of the comics/cartoon, then hit "search" </Text>
-
-      </View>
-
-      <View style={styles.rowContainer}>
-        <ComicSearch name="comic1" year="2020"/>
-        <Button color='orange' title="SEARCH"/>
-      </View>
-
-    </View>
-  );
-}
-
-const ComicSearch = (props) => {
-
-  const [text, setText] = useState(props.name);
-
-  return (
-    <View>
-      <Image
-        source={{uri: "http://clipart-library.com/images/gieEkgzjT.png"}}
-        style={{width: 120, height: 120}}
-      />
-      <View style={{flexDirection:'row'}}>
-        <TextInput
-          style={{
-            height: 40,
-            borderColor: 'gray',
-            borderWidth: 1
-          }}
-          onChangeText={text => {setText(text)}}
-          defaultValue="Type here"
-        />
-      </View>
-
-    </View>
-  );
-}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection:'column',
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  rowContainer: {
-    flexDirection:'row',
-  },
-  columnContainer: {
-    flexDirection: 'column',
+  space: {
+    width: 20,
+    height: 20,
   },
   helloText: {
     fontSize: 48,
@@ -161,5 +117,10 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: 'black',
     alignItems: 'left',
-  }
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center"
+  },
 });
