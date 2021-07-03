@@ -7,14 +7,10 @@ export default function About({route,navigation}) {
     <View style={styles.container}>
       <Text style={styles.headerText}> About this App </Text>
       <View style={styles.leftAllignment}>
-        <Text style={styles.generalText}>Use this app to browse interesting comics!</Text>
+        <Text style={styles.generalText}>Use this function to record your reading history!</Text>
         <Text style={styles.generalText}>Created by Ruyi Cai</Text>
       </View>
       <View>
-        <Button
-          style={{flexDirection:'row'}}
-          title="Email"
-        />
         <Button title="Go Home"
             onPress={() => navigation.navigate('Home')} />
       </View>
@@ -29,7 +25,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    margin:'25%',
     marginTop:20,
     padding:20,
   },
